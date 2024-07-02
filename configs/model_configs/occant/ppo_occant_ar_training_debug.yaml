@@ -1,0 +1,65 @@
+BASE_TASK_CONFIG_PATH: "configs/exploration/gibson_train_w_ar.yaml"
+TRAINER_NAME: "ppo_occant_hierarchical"
+ENV_NAME: "ExpRLEnv"
+SIMULATOR_GPU_ID: 0
+TORCH_GPU_ID: 0
+VIDEO_OPTION: ["tensorboard"]
+TENSORBOARD_DIR: "tb/foi/occant_ar_dbg"
+VIDEO_DIR: "video_dir/foi/occant_ar_dbg"
+TEST_EPISODE_COUNT: 10
+EVAL_CKPT_PATH_DIR: ""
+NUM_PROCESSES: 2 # 40
+SENSORS: ["RGB_SENSOR", "DEPTH_SENSOR"]
+CHECKPOINT_FOLDER: "data/new_checkpoints/foi/occant_ar_dbg"
+PRELOAD_MAP: False
+#NUM_UPDATES: 10000
+T_EXP: 20
+T_MAX: 20
+DISTRIBUTED: True
+
+TOTAL_NUM_STEPS: -1
+NUM_CHECKPOINTS: -1
+
+NUM_UPDATES: 251
+LOG_INTERVAL: 1
+CHECKPOINT_INTERVAL: 10
+
+RL:
+  PPO:
+    # ppo params
+    num_local_steps: 5
+    num_global_steps: 4
+    ppo_epoch: 4
+    num_mini_batch: 1 # 10
+    global_reward_type: 'impact'
+    global_reward_scale: 0.01
+  ANS:
+    # Uncomment this for anticipation reward
+    goal_interval: 5  # goal sampling interval for global policy
+    use_ddp: True
+    image_scale_hw: [128, 128]
+    gpu_ids: [0]
+    reward_type: "map_accuracy"
+    use_gt_positioning: False
+    overall_map_size: 961
+    visitation_count_divider: 5
+    obs_resized_dim: 42
+    #crop_map_for_planning: False
+    #local_reward_type: 'diff'
+    MAPPER:
+      map_size: 101
+      registration_type: 'moving_average'
+      label_id: 'ego_map_gt_anticipated'
+      pose_predictor_inputs: ['ego_map']
+      ignore_pose_estimator: False
+      map_batch_size: 32
+      use_data_parallel: False
+      replay_size: 10000
+      gpu_ids: [0]
+    OCCUPANCY_ANTICIPATOR:
+      type: 'occant_rgbd'
+      GP_ANTICIPATION:
+        resnet_type: 'resnet18'
+        unet_nsf: 16
+    LOCAL_POLICY:
+      use_heuristic_policy: False
