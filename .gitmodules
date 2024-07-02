@@ -1,0 +1,3 @@
+[submodule "envs/habitat-sim"]
+	path = envs/habitat-sim
+	url = https://github.com/facebookresearch/habitat-sim.git
