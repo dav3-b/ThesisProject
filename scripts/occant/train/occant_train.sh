@@ -1,16 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=occant_train           					# Job name
-#SBATCH --partition=all_usr_prod						# Specify the partition or queue name
-#SBATCH --gres=gpu:2                   					# GPU
+#SBATCH --job-name=occant_train           								# Job name
+#SBATCH --partition=											# Specify the partition or queue name
+#SBATCH --gres=gpu:2                   									# GPU
 #SBATCH --constraint="gpu_A40_48G|gpu_RTX6000_24G|gpu_RTXA5000_24G|gpu_P100_16G|gpu_RTX5000_16G"
-#SBATCH --mem=48G                      					# Memory per node (in GB)
-#SBATCH --time=24:00:00                					# Time limit (hh:mm:ss)
-#SBATCH --output=occant2.out         					# Standard output file
-#SBATCH --error=occant2.err          					# Standard error file
-#SBATCH --exclude=gervasoni
-#SBATCH --account=tesi_dborghi
+#SBATCH --mem=48G                      									# Memory per node (in GB)
+#SBATCH --time=24:00:00                									# Time limit (hh:mm:ss)
+#SBATCH --output=occant2.out         									# Standard output file
+#SBATCH --error=occant2.err          									# Standard error file
+#SBATCH --exclude=
+#SBATCH --account=
 
-#export PYTHONPATH='/homes/dborghi/projects/thesis_exploration2'
+#export PYTHONPATH='/homes'
 
 source /etc/profile.d/modules.sh
 
@@ -20,8 +20,8 @@ source /etc/profile.d/modules.sh
 module unload gcc
 module load gcc/9.5.0
 
-source activate thesis2
-cd /homes/dborghi/projects/thesis_exploration2
+source activate 
+cd /homes
 srun python -u run.py --exp-config configs/model_configs/occant/ppo_occant_ar_training.yaml --run-type train
 
 # Change to the directory where your code is located

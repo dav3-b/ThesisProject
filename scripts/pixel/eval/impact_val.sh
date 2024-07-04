@@ -1,14 +1,14 @@
 #!/bin/bash
-#SBATCH --job-name=impact_val               # Job name
-#SBATCH --partition=all_usr_prod			# Specify the partition or queue name
-#SBATCH --gres=gpu:1                        # GPU
-#SBATCH --mem=16G                        # Memory per node (in GB)
-#SBATCH --time=24:00:00                 # Time limit (hh:mm:ss)
-#SBATCH --output=impact_val.out             # Standard output file
-#SBATCH --error=impact_val.err              # Standard error file
-#SBATCH --account=tesi_dborghi
+#SBATCH --job-name=impact_val               	# Job name
+#SBATCH --partition=				# Specify the partition or queue name
+#SBATCH --gres=gpu:1                        	# GPU
+#SBATCH --mem=16G                       	# Memory per node (in GB)
+#SBATCH --time=24:00:00                 	# Time limit (hh:mm:ss)
+#SBATCH --output=impact_val.out             	# Standard output file
+#SBATCH --error=impact_val.err              	# Standard error file
+#SBATCH --account=
 
-#export PYTHONPATH='/homes/dborghi/projects/thesis_exploration2'
+#export PYTHONPATH='/homes'
 
 source /etc/profile.d/modules.sh
 
@@ -18,8 +18,8 @@ source /etc/profile.d/modules.sh
 module unload gcc
 module load gcc/9.5.0
 
-source activate thesis2
-cd /homes/dborghi/projects/thesis_exploration2
+source activate 
+cd /homes
 
 #Validation
 srun python -u run.py --exp-config configs/model_configs/impact_pixel/ppo_impact_pixel_mp3d_val_noisy.yaml --run-type eval

@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=e3b_train           # Job name
-#SBATCH --partition=students-prod      # Specify the partition or queue name
-#SBATCH --gres=gpu:1                   # GPU
-#SBATCH --mem=32G                      # Memory per node (in GB)
-#SBATCH --time=24:00:00                # Time limit (hh:mm:ss)
-#SBATCH --output=e3b_train.out         # Standard output file
-#SBATCH --error=e3b_train.err          # Standard error file
+#SBATCH --job-name=e3b_train           	# Job name
+#SBATCH --partition=			# Specify the partition or queue name
+#SBATCH --gres=gpu:1                   	# GPU
+#SBATCH --mem=32G                      	# Memory per node (in GB)
+#SBATCH --time=24:00:00                	# Time limit (hh:mm:ss)
+#SBATCH --output=e3b_train.out         	# Standard output file
+#SBATCH --error=e3b_train.err          	# Standard error file
 
-#export PYTHONPATH='/homes/dborghi/projects/thesis_exploration2'
+#export PYTHONPATH='/homes'
 
 source /etc/profile.d/modules.sh
 
@@ -17,8 +17,8 @@ module load cuda/11.7
 module unload gcc
 module load gcc/9.5.0
 
-source activate thesis2
-cd /homes/dborghi/projects/thesis_exploration2
+source activate 
+cd /homes
 srun python -u run.py --exp-config configs/model_configs/impact_pixel/ppo_impact_pixel_training_e3b.yaml --run-type train
 
 # Change to the directory where your code is located
