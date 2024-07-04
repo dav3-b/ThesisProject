@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH --job-name=curiosity_ckpt25_test               	# Job name
-#SBATCH --partition=all_usr_prod			# Specify the partition or queue name
-#SBATCH --gres=gpu:1                        # GPU
-#SBATCH --mem=24G                        	# Memory per node (in GB)
-#SBATCH --time=24:00:00                 	# Time limit (hh:mm:ss)
-#SBATCH --output=curiosity_ckpt25_test2.out             	# Standard output file
-#SBATCH --error=curiosity_ckpt25_test2.err              	# Standard error file
-#SBATCH --account=tesi_dborghi
+#SBATCH --partition=					# Specify the partition or queue name
+#SBATCH --gres=gpu:1                        		# GPU
+#SBATCH --mem=24G                        		# Memory per node (in GB)
+#SBATCH --time=24:00:00                 		# Time limit (hh:mm:ss)
+#SBATCH --output=curiosity_ckpt25_test2.out             # Standard output file
+#SBATCH --error=curiosity_ckpt25_test2.err              # Standard error file
+#SBATCH --account=
 
-#export PYTHONPATH='/homes/dborghi/projects/thesis_exploration2'
+#export PYTHONPATH='/homes'
 
 source /etc/profile.d/modules.sh
 
@@ -18,8 +18,8 @@ source /etc/profile.d/modules.sh
 module unload gcc
 module load gcc/9.5.0
 
-source activate thesis2
-cd /homes/dborghi/projects/thesis_exploration2
+source activate 
+cd /homes
 
 srun python -u run.py --exp-config configs/model_configs/curiosity/ppo_curiosity_mp3d_test_noisy.yaml --run-type eval
 
